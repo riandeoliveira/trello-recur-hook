@@ -1,0 +1,7 @@
+services:
+  trello-recur-hook:
+    build: .
+    container_name: trello-recur-hook
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT}:3000"
