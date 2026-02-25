@@ -18,8 +18,11 @@ app.post("/api/webhook/trello", async (req: TrelloWebhookRequest, reply) => {
   const labels = await trello.labels.getAll();
   const card = await trello.cards.get(cardId);
 
-  const doneList = lists.find((item) => item.name === "FEITO");
-  const recurringLabel = labels.find((item) => item.name === "RECORRENTE");
+  const doneList = lists.find((item) => item.name.includes("FEITO"));
+
+  const recurringLabel = labels.find((item) =>
+    item.name.includes("RECORRENTE"),
+  );
 
   if (!doneList) throw new Error("List not found: FEITO");
   if (!recurringLabel) throw new Error("Label not found: RECORRENTE");
