@@ -50,12 +50,14 @@ export abstract class RecurrenceUtil {
 
   public static parse(cardDesc: string): RecurrenceRule | null {
     try {
-      const normalized = cardDesc
-        .replace(/^```json\s*/i, "")
-        .replace(/```$/i, "")
-        .trim();
+      let normalized = cardDesc;
+      const match = cardDesc.match(/```(?:json)?\s*([\s\S]+?)\s*```/i);
+      
+      if (match) {
+        normalized = match[1];
+      }
 
-      const rule = JSON.parse(normalized);
+      const rule = JSON.parse(normalized.trim());
 
       if (!rule.type || !rule.value) return null;
 

@@ -2,6 +2,7 @@ import fastify from "fastify";
 import { Trello } from "./trello";
 import type { TrelloWebhookRequest } from "./types/webhook";
 import { RecurrenceUtil } from "./utils/recurrence-util";
+import { startCronJobs } from "./cron";
 
 const trello = new Trello();
 const app = fastify({ logger: true });
@@ -60,6 +61,8 @@ app.head("/api/webhook/trello", (_, reply) => {
 });
 
 const port = Number(process.env.PORT) || 3000;
+
+startCronJobs();
 
 app
   .listen({ port, host: "0.0.0.0" })

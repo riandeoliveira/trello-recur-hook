@@ -21,7 +21,7 @@ export class Card {
   }
 }
 
-interface ICard {
+export interface ICard {
   id: string;
   idList: string;
   idLabels: string[];
