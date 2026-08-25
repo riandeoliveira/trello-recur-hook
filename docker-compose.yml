@@ -4,4 +4,4 @@ services:
     container_name: trello-recur-hook
     restart: unless-stopped
     ports:
-      - "${APP_PORT}:3000"
+      - "127.0.0.1:${APP_PORT}:3000"
